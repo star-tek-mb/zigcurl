@@ -5,7 +5,9 @@ libcurl packaged with zig
 # Versions
 
 curl 8.1.1
+
 mbedtls 3.4.0
+
 zlib 1.2.13
 
 # Simple usage
@@ -28,3 +30,9 @@ var res = c.curl_easy_perform(curl);
 # Building and linking example
 
 See `build.zig` and `main_tests` linking example.
+
+# Credits
+
+For original work
+
+https://github.com/mattnite/zig-libcurl
