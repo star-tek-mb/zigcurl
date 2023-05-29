@@ -7,8 +7,8 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const z = zlib.create(b, target, optimize);
-    const tls = mbedtls.create(b, target, optimize);
+    const z = zlib.create(b, target);
+    const tls = mbedtls.create(b, target);
     const lib = curl.create(b, target, optimize);
     lib.linkLibrary(z);
     lib.linkLibrary(tls);

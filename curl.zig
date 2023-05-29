@@ -31,7 +31,7 @@ pub fn create(b: *std.Build, target: std.zig.CrossTarget, optimize: std.builtin.
     lib.defineCMacro("HAVE_LIBZ", "1");
     lib.defineCMacro("HAVE_ZLIB_H", "1");
     if (target.isWindows()) {
-        lib.linkSystemLibrary("winmm");
+        lib.linkSystemLibrary("bcrypt");
         return lib;
     }
     lib.defineCMacro("CURL_EXTERN_SYMBOL", "__attribute__ ((__visibility__ (\"default\"))");

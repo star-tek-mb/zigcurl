@@ -6,12 +6,12 @@ fn root() []const u8 {
 
 const root_path = root() ++ "/";
 
-pub fn create(b: *std.Build, target: std.zig.CrossTarget, optimize: std.builtin.OptimizeMode) *std.Build.Step.Compile {
+pub fn create(b: *std.Build, target: std.zig.CrossTarget) *std.Build.Step.Compile {
     const lib = b.addStaticLibrary(.{
         .name = "mbedtls",
         .root_source_file = null,
         .target = target,
-        .optimize = optimize,
+        .optimize = .ReleaseSmall,
     });
 
     lib.addCSourceFiles(srcs, &.{"-std=c99"});
