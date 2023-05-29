@@ -9,6 +9,7 @@ pub fn create(b: *std.Build, target: std.zig.CrossTarget, optimize: std.builtin.
     lib.addCSourceFiles(srcs, &.{});
     lib.addIncludePath("curl/lib");
     lib.addIncludePath("curl/include");
+    lib.installHeadersDirectory("curl/include/curl", "curl");
     lib.linkLibC();
     lib.defineCMacro("BUILDING_LIBCURL", null);
     lib.defineCMacro("CURL_STATICLIB", "1");

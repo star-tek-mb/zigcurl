@@ -8,6 +8,7 @@ pub fn create(b: *std.Build, target: std.zig.CrossTarget, optimize: std.builtin.
     });
     lib.linkLibC();
     lib.addCSourceFiles(srcs, &.{"-std=c89"});
+    lib.installHeader("zlib/zlib.h", "zlib.h");
     return lib;
 }
 

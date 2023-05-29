@@ -3,6 +3,10 @@ const c = @cImport({
     @cInclude("curl/curl.h");
 });
 
+fn noop(_: *anyopaque, size: usize, elems: usize, _: *anyopaque) callconv(.C) usize {
+    return size * elems;
+}
+
 test "basic" {
     _ = c.curl_global_init(c.CURL_GLOBAL_DEFAULT);
     defer c.curl_global_cleanup();
@@ -11,6 +15,7 @@ test "basic" {
     _ = c.curl_easy_setopt(curl, c.CURLOPT_URL, "https://www.google.com/");
     _ = c.curl_easy_setopt(curl, c.CURLOPT_SSL_VERIFYPEER, @as(c_int, 0));
     _ = c.curl_easy_setopt(curl, c.CURLOPT_SSL_VERIFYHOST, @as(c_int, 0));
+    _ = c.curl_easy_setopt(curl, c.CURLOPT_WRITEFUNCTION, noop);
     var res = c.curl_easy_perform(curl);
     try std.testing.expectEqual(res, c.CURLE_OK);
 }

@@ -12,6 +12,8 @@ pub fn create(b: *std.Build, target: std.zig.CrossTarget, optimize: std.builtin.
     lib.addIncludePath("mbedtls/include");
     lib.addIncludePath("mbedtls/library");
     lib.linkLibC();
+    lib.installHeadersDirectory("mbedtls/include/mbedtls", "mbedtls");
+    lib.installHeadersDirectory("mbedtls/include/psa", "psa");
 
     if (target.isWindows()) {
         lib.linkSystemLibrary("ws2_32");
