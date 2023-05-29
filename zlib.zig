@@ -1,5 +1,11 @@
 const std = @import("std");
 
+fn root() []const u8 {
+    return std.fs.path.dirname(@src().file) orelse ".";
+}
+
+const root_path = root() ++ "/";
+
 pub fn create(b: *std.Build, target: std.zig.CrossTarget, optimize: std.builtin.OptimizeMode) *std.Build.Step.Compile {
     const lib = b.addStaticLibrary(.{
         .name = "z",
@@ -8,24 +14,24 @@ pub fn create(b: *std.Build, target: std.zig.CrossTarget, optimize: std.builtin.
     });
     lib.linkLibC();
     lib.addCSourceFiles(srcs, &.{"-std=c89"});
-    lib.installHeader("zlib/zlib.h", "zlib.h");
+    lib.installHeader(root_path ++ "zlib/zlib.h", "zlib.h");
     return lib;
 }
 
 const srcs = &.{
-    "zlib/adler32.c",
-    "zlib/compress.c",
-    "zlib/crc32.c",
-    "zlib/deflate.c",
-    "zlib/gzclose.c",
-    "zlib/gzlib.c",
-    "zlib/gzread.c",
-    "zlib/gzwrite.c",
-    "zlib/inflate.c",
-    "zlib/infback.c",
-    "zlib/inftrees.c",
-    "zlib/inffast.c",
-    "zlib/trees.c",
-    "zlib/uncompr.c",
-    "zlib/zutil.c",
+    root_path ++ "zlib/adler32.c",
+    root_path ++ "zlib/compress.c",
+    root_path ++ "zlib/crc32.c",
+    root_path ++ "zlib/deflate.c",
+    root_path ++ "zlib/gzclose.c",
+    root_path ++ "zlib/gzlib.c",
+    root_path ++ "zlib/gzread.c",
+    root_path ++ "zlib/gzwrite.c",
+    root_path ++ "zlib/inflate.c",
+    root_path ++ "zlib/infback.c",
+    root_path ++ "zlib/inftrees.c",
+    root_path ++ "zlib/inffast.c",
+    root_path ++ "zlib/trees.c",
+    root_path ++ "zlib/uncompr.c",
+    root_path ++ "zlib/zutil.c",
 };
