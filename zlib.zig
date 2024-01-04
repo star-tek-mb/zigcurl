@@ -7,7 +7,7 @@ pub fn create(b: *std.Build, target: std.zig.CrossTarget) *std.Build.Step.Compil
         .optimize = .ReleaseSmall,
     });
     lib.linkLibC();
-    lib.addCSourceFiles(srcs, &.{"-std=c89"});
+    lib.addCSourceFiles(.{ .files = srcs, .flags = &.{"-std=c89"} });
     lib.installHeader("zlib/zlib.h", "zlib.h");
     lib.installHeader("zlib/zconf.h", "zconf.h");
     return lib;

@@ -8,9 +8,9 @@ pub fn create(b: *std.Build, target: std.zig.CrossTarget) *std.Build.Step.Compil
         .optimize = .ReleaseSmall,
     });
 
-    lib.addCSourceFiles(srcs, &.{"-std=c99"});
-    lib.addIncludePath("mbedtls/include");
-    lib.addIncludePath("mbedtls/library");
+    lib.addCSourceFiles(.{ .files = srcs, .flags = &.{"-std=c99"} });
+    lib.addIncludePath(.{ .path = "mbedtls/include" });
+    lib.addIncludePath(.{ .path = "mbedtls/library" });
     lib.linkLibC();
     lib.installHeadersDirectory("mbedtls/include/mbedtls", "mbedtls");
     lib.installHeadersDirectory("mbedtls/include/psa", "psa");

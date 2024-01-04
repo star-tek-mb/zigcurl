@@ -2078,7 +2078,7 @@
  *
  * This module adds support for the AES Armv8-A Cryptographic Extensions on Aarch64 systems.
  */
-#define MBEDTLS_AESCE_C
+//#define MBEDTLS_AESCE_C
 
 /**
  * \def MBEDTLS_AES_C
